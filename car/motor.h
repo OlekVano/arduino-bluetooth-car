@@ -23,20 +23,16 @@ class Motor {
     }
 
     void move(int speed, bool reverse=false) {
-      if (speed <= 255 && speed > 0) {
-        if (reverse) {
-          analogWrite(speedPin, speed);
-          digitalWrite(directionPin1, LOW);
-          digitalWrite(directionPin2, HIGH);
-        }
-        else {
-          analogWrite(speedPin, speed);
-          digitalWrite(directionPin1, HIGH);
-          digitalWrite(directionPin2, LOW);
-        } 
+      if (speed > 255 && speed <= 0) stop();
+      else if (reverse) {
+        analogWrite(speedPin, speed);
+        digitalWrite(directionPin1, LOW);
+        digitalWrite(directionPin2, HIGH);
       }
       else {
-        stop();
+        analogWrite(speedPin, speed);
+        digitalWrite(directionPin1, HIGH);
+        digitalWrite(directionPin2, LOW);
       }
     }
 };
